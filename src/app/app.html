@@ -1,56 +1,22 @@
-<div class="container">
 
-  <h1>My Notes</h1>
+<div class="container mt-4">
+  <h1 class="text-center mb-4">My Notes</h1>
 
-  <div class="layout">
-
-    <!-- LEFT COLUMN: ADD NOTES -->
-    <div class="form">
-
-      <h2>Write a note</h2>
-
-      <input #title type="text" placeholder="Note title">
-
-      <textarea #text placeholder="Write your note..."></textarea>
-
-      <button (click)="addNote(title.value, text.value); title.value=''; text.value=''">
-        Add Note
-      </button>
-
+  <div class="row">
+    <div class="col-md-5">
+      <app-note-form
+  #noteForm
+  (add)="addNote($event.title, $event.text)"
+  (saveEdit)="updateNote($event.id, $event.title, $event.text)">
+</app-note-form>
     </div>
 
-
-    <!-- RIGHT COLUMN: NOTES LIST -->
-    <div class="notes-section">
-
-      <h2>My Notes</h2>
-
-      @if (notes.length === 0) {
-        <p class="empty">No notes yet.</p>
-      }
-
-      <div class="notes">
-
-        @for (note of notes; track $index) {
-
-          <div class="note">
-
-            <h3>{{ note.title }}</h3>
-
-            <p>{{ note.text }}</p>
-
-            <button class="delete" (click)="deleteNote($index)">
-              Delete
-            </button>
-
-          </div>
-
-        }
-
-      </div>
-
+    <div class="col-md-7">
+      <app-note-list
+  [notes]="notes()"
+  (delete)="deleteNote($event)"
+  (edit)="noteForm.startEditing($event)">
+</app-note-list>
     </div>
-
   </div>
-
 </div>

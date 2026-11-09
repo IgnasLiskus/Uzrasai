@@ -1,0 +1,24 @@
+<h4>{{ editingNote() ? 'Edit note' : 'Write a note' }}</h4>
+
+<div class="mb-3">
+  <input
+    #title
+    type="text"
+    class="form-control"
+    placeholder="Note title"
+    [value]="editingNote()?.title || ''">
+</div>
+
+<div class="mb-3">
+  <textarea
+    #text
+    class="form-control"
+    rows="5"
+    placeholder="Write your note...">{{ editingNote()?.text || '' }}</textarea>
+</div>
+
+<button
+  class="btn btn-primary"
+  (click)="addNote(title.value, text.value)">
+  {{ editingNote() ? 'Save Changes' : 'Add Note' }}
+</button>

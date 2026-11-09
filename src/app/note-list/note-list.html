@@ -1,0 +1,24 @@
+<h4>My Notes</h4>
+
+@if (notes().length === 0) {
+  <p>No notes yet.</p>
+}
+
+@for (note of notes(); track note.id) {
+  <div class="border p-3 mb-3">
+    <h5>{{ note.title }}</h5>
+    <p>{{ note.text }}</p>
+
+    <button
+      class="btn btn-warning btn-sm me-2"
+      (click)="editNote(note)">
+      Edit
+    </button>
+
+    <button
+      class="btn btn-danger btn-sm"
+      (click)="deleteNote(note.id)">
+      Delete
+    </button>
+  </div>
+}
